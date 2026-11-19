@@ -1,0 +1,37 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build universal app
+        run: ./scripts/build-app.sh
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PerAppVolume
+          path: build/*.zip
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/*.zip
+          generate_release_notes: true
+          body: |
+            **English** — Download `PerAppVolume-*.zip`, unzip it and move the app to Applications. The first time, open it via System Settings › Privacy & Security › Open Anyway (the app isn't notarized). See the [README](https://github.com/${{ github.repository }}#install).
+
+            **Español** — Descarga `PerAppVolume-*.zip`, descomprímelo y mueve la app a Aplicaciones. La primera vez, ábrela desde Ajustes del Sistema › Privacidad y seguridad › Abrir igualmente (la app no está notarizada). Consulta el [README en español](https://github.com/${{ github.repository }}/blob/main/README.es.md#instalación).

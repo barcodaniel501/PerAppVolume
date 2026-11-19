@@ -1,0 +1,1 @@
+"NSAudioCaptureUsageDescription" = "PerAppVolume needs access to system audio to change the volume of each app. Audio is processed in real time and is never recorded or saved.";

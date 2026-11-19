@@ -1,0 +1,1 @@
+"NSAudioCaptureUsageDescription" = "PerAppVolume necesita acceso al audio del sistema para cambiar el volumen de cada aplicación. El audio se procesa en tiempo real y nunca se graba ni se guarda.";

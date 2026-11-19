@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Build output
+.build/
+.swiftpm/
+build/
+*.xcodeproj/
+xcuserdata/
+
+# Secrets and local environment (never commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+*.provisionprofile
+*.keychain
+*.keychain-db
+*credentials*
+*secret*
