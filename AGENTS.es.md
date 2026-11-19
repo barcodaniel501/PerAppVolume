@@ -11,7 +11,7 @@ Sigue estos pasos en orden e informa el resultado de cada uno. Si una comprobaci
 1. **Comprueba la plataforma.** `sw_vers -productVersion` debe ser 14.2 o posterior.
 2. **Instala la última versión publicada** (preferido, no requiere herramientas de compilación):
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/<tu-usuario>/PerAppVolume/main/scripts/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/barcodaniel501/PerAppVolume/main/scripts/install.sh | bash
    ```
    Desde un clon local puedes ejecutar `PERAPPVOLUME_REPO=<dueño>/PerAppVolume ./scripts/install.sh`.
    El script descarga el zip del release, reemplaza `/Applications/PerAppVolume.app`, quita el atributo de cuarentena y abre la app.

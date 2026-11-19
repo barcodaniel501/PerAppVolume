@@ -41,7 +41,7 @@ macOS only has one volume control for everything. PerAppVolume adds what Windows
 Open **Terminal** and run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<your-user>/PerAppVolume/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/barcodaniel501/PerAppVolume/main/scripts/install.sh | bash
 ```
 
 It downloads the latest release, installs it in **Applications**, removes the download quarantine (so macOS doesn't block it) and opens the app. You'll find it in the menu bar; continue with [Permission](#permission-system-audio-recording).
@@ -106,7 +106,7 @@ xcode-select --install
 ```
 
 ```bash
-git clone https://github.com/<your-user>/PerAppVolume.git
+git clone https://github.com/barcodaniel501/PerAppVolume.git
 ```
 
 ```bash

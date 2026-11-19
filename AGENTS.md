@@ -11,7 +11,7 @@ Run these steps in order and report the result of each one. Stop and tell the us
 1. **Check the platform.** `sw_vers -productVersion` must be 14.2 or newer.
 2. **Install the latest release** (preferred, no build tools needed):
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/<your-user>/PerAppVolume/main/scripts/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/barcodaniel501/PerAppVolume/main/scripts/install.sh | bash
    ```
    From a local clone you can run `PERAPPVOLUME_REPO=<owner>/PerAppVolume ./scripts/install.sh` instead.
    The script downloads the release zip, replaces `/Applications/PerAppVolume.app`, removes the quarantine attribute and opens the app.

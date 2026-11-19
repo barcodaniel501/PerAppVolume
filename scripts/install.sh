@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Installs (or updates) the latest PerAppVolume release into /Applications.
 #
-#   curl -fsSL https://raw.githubusercontent.com/<your-user>/PerAppVolume/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/barcodaniel501/PerAppVolume/main/scripts/install.sh | bash
 #
 # Options (environment variables):
 #   PERAPPVOLUME_REPO=owner/repo   GitHub repository to download from
 #   PERAPPVOLUME_NO_OPEN=1         install without opening the app
 set -euo pipefail
 
-REPO="${PERAPPVOLUME_REPO:-<your-user>/PerAppVolume}"
+REPO="${PERAPPVOLUME_REPO:-barcodaniel501/PerAppVolume}"
 APP_NAME="PerAppVolume"
 DEST="/Applications/$APP_NAME.app"
 
@@ -17,7 +17,7 @@ fail() { printf '\033[31mError: %s\033[0m\n' "$*" >&2; exit 1; }
 
 # 1. Checks
 [[ "$(uname -s)" == "Darwin" ]] || fail "PerAppVolume only runs on macOS."
-[[ "$REPO" != *"<your-user>"* ]] || fail "Set the repository first: PERAPPVOLUME_REPO=owner/PerAppVolume"
+[[ "$REPO" == */* ]] || fail "PERAPPVOLUME_REPO must look like owner/PerAppVolume (got: $REPO)"
 
 version="$(sw_vers -productVersion)"
 major="${version%%.*}"
