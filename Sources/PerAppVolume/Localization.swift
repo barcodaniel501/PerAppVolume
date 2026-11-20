@@ -13,8 +13,11 @@ final class Localizer: ObservableObject {
     static let shared = Localizer()
 
     @Published var choice: LanguageChoice {
-        didSet { UserDefaults.standard.set(choice.rawValue, forKey: "language") }
+        didSet { if persistChoice { UserDefaults.standard.set(choice.rawValue, forKey: "language") } }
     }
+
+    /// Off while generating screenshots, so the user's saved language isn't changed.
+    var persistChoice = true
 
     private init() {
         choice = LanguageChoice(rawValue: UserDefaults.standard.string(forKey: "language") ?? "") ?? .system

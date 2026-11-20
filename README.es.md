@@ -13,6 +13,10 @@
   <a href="README.md">🇺🇸 English</a> · 🇪🇸 Español
 </p>
 
+<p align="center">
+  <img src="docs/screenshots/demo-es.gif" width="342" alt="Demostración de PerAppVolume: Webex se baja a 30% y WhatsApp se sube a 150% desde la barra de menú">
+</p>
+
 ---
 
 macOS tiene un solo control de volumen para todo. PerAppVolume agrega lo que Windows tiene desde hace años: **un control de volumen para cada app**, en la barra de menú.
@@ -28,6 +32,15 @@ macOS tiene un solo control de volumen para todo. PerAppVolume agrega lo que Win
 - 🎧 **Sigue tu salida de audio**: si pasas de parlantes a AirPods, sigue funcionando
 - 🧩 **Sin drivers ni contraseña de administrador**: usa los *process taps* nativos de Core Audio de Apple. Para desinstalarla basta con borrar la app
 - 🆓 Gratis y de código abierto (MIT)
+
+## Capturas
+
+| Panel de la barra de menú | Ventana del mezclador | Ajustes |
+| :---: | :---: | :---: |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/menu-es-dark.png"><img src="docs/screenshots/menu-es-light.png" width="260" alt="Panel de la barra de menú"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/window-es-dark.png"><img src="docs/screenshots/window-es-light.png" width="260" alt="Ventana del mezclador"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/settings-es-dark.png"><img src="docs/screenshots/settings-es-light.png" width="260" alt="Ventana de ajustes"></picture> |
+| Arriba el volumen del sistema y debajo todas las apps abiertas. El punto verde marca las que están sonando; el naranja indica que se subió por encima de 100%. | El mismo mezclador en una ventana que se puede agrandar, con *Restablecer todos los volúmenes*. | Abrir al iniciar sesión, idioma, permisos y versión. |
+
+Las capturas siguen el tema de tu GitHub (claro u oscuro).
 
 ## Requisitos
 
@@ -119,6 +132,7 @@ cd PerAppVolume && make install
 | `make install` | Compila y copia la app a `/Applications` |
 | `make run` | Compila y abre la app |
 | `make icon` | Vuelve a generar el ícono de la app |
+| `make screenshots` | Vuelve a generar las capturas y los GIF del README (datos de ejemplo, ambos idiomas, claro y oscuro) |
 | `ARCHS=arm64 make app` | Compilación más rápida solo para Apple Silicon |
 
 `PerAppVolume --list` (el ejecutable dentro de la app) muestra las apps que ve Core Audio, útil para diagnosticar problemas:

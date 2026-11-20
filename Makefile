@@ -1,6 +1,6 @@
 APP = PerAppVolume
 
-.PHONY: app install run icon clean
+.PHONY: app install run icon screenshots clean
 
 ## Build build/PerAppVolume.app (universal) and a release zip
 app:
@@ -20,6 +20,12 @@ run: app
 icon:
 	swift scripts/make-icon.swift build/AppIcon.iconset
 	iconutil -c icns build/AppIcon.iconset -o AppBundle/AppIcon.icns
+
+## Regenerate docs/screenshots (demo data; forces the default blue accent so images look the same on any Mac)
+screenshots:
+	ARCHS=$$(uname -m) ./scripts/build-app.sh
+	rm -rf docs/screenshots
+	"build/$(APP).app/Contents/MacOS/$(APP)" --screenshots docs/screenshots -AppleAccentColor 4
 
 clean:
 	rm -rf .build build

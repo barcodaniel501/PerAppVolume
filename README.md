@@ -13,6 +13,10 @@
   🇺🇸 English · <a href="README.es.md">🇪🇸 Español</a>
 </p>
 
+<p align="center">
+  <img src="docs/screenshots/demo-en.gif" width="342" alt="PerAppVolume demo: Webex is turned down to 30% and WhatsApp boosted to 150% from the menu bar">
+</p>
+
 ---
 
 macOS only has one volume control for everything. PerAppVolume adds what Windows has had for years: **a volume slider for every app**, right in your menu bar.
@@ -28,6 +32,15 @@ macOS only has one volume control for everything. PerAppVolume adds what Windows
 - 🎧 **Follows your output device**: switch from speakers to AirPods and it keeps working
 - 🧩 **No drivers, no admin password**: uses Apple's native Core Audio *process taps*. To uninstall, just delete the app
 - 🆓 Free and open source (MIT)
+
+## Screenshots
+
+| Menu bar panel | Mixer window | Settings |
+| :---: | :---: | :---: |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/menu-en-dark.png"><img src="docs/screenshots/menu-en-light.png" width="260" alt="Menu bar panel"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/window-en-dark.png"><img src="docs/screenshots/window-en-light.png" width="260" alt="Mixer window"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/settings-en-dark.png"><img src="docs/screenshots/settings-en-light.png" width="260" alt="Settings window"></picture> |
+| System volume on top, then every open app. A green dot marks the apps playing now; orange means boosted above 100%. | The same mixer in a resizable window, with *Reset all volumes*. | Open at login, language, permissions and version. |
+
+Screenshots follow your GitHub theme (light or dark).
 
 ## Requirements
 
@@ -119,6 +132,7 @@ cd PerAppVolume && make install
 | `make install` | Builds and copies the app to `/Applications` |
 | `make run` | Builds and opens the app |
 | `make icon` | Regenerates the app icon |
+| `make screenshots` | Regenerates the README screenshots and demo GIFs (demo data, both languages, light and dark) |
 | `ARCHS=arm64 make app` | Faster build for Apple Silicon only |
 
 `PerAppVolume --list` (the binary inside the app) prints the apps Core Audio sees, which helps with troubleshooting:

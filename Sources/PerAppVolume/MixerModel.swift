@@ -69,7 +69,7 @@ final class MixerModel: ObservableObject {
 
     func icon(for app: AudioApp) -> NSImage {
         if let icon = iconCache[app.path] { return icon }
-        let icon = NSWorkspace.shared.icon(forFile: app.path)
+        let icon = (useOriginalIcons ? Self.originalIcon(at: app.path) : nil) ?? NSWorkspace.shared.icon(forFile: app.path)
         iconCache[app.path] = icon
         return icon
     }
@@ -180,6 +180,27 @@ final class MixerModel: ObservableObject {
             }
         }
         for id in errors.keys where settings[id] == nil { errors[id] = nil }
+    }
+
+    // MARK: Demo data (only used by `--screenshots`; never saved, never creates taps)
+
+    /// Screenshots use each app's own .icns, so they don't depend on the Mac's tinted-icon setting.
+    var useOriginalIcons = false
+
+    private static func originalIcon(at path: String) -> NSImage? {
+        guard let bundle = Bundle(path: path),
+              var file = bundle.object(forInfoDictionaryKey: "CFBundleIconFile") as? String else { return nil }
+        if !file.hasSuffix(".icns") { file += ".icns" }
+        return NSImage(contentsOfFile: "\(path)/Contents/Resources/\(file)")
+    }
+
+    func loadDemo(apps: [AudioApp], settings: [String: AppSetting]) {
+        self.apps = apps
+        self.settings = settings
+    }
+
+    func setDemoSetting(_ setting: AppSetting, for id: String) {
+        settings[id] = setting
     }
 
     // MARK: Persistence

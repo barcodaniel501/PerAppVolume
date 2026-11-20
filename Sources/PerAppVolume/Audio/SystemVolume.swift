@@ -43,6 +43,15 @@ final class SystemVolume: ObservableObject {
         read()
     }
 
+    /// Demo values for `--screenshots` (does not touch the real device).
+    func loadDemo(volume: Double, deviceName: String) {
+        self.volume = volume
+        self.deviceName = deviceName
+        muted = false
+        canSetVolume = true
+        canMute = true
+    }
+
     /// Follows the default output device and listens for changes (e.g. the volume keys).
     private func attach() {
         detach()

@@ -52,6 +52,9 @@ Optional, removes saved volumes and settings: `defaults delete io.github.perappv
 | `make install` | `make app` and copy to `/Applications` |
 | `make run` | `make app` and open it |
 | `make icon` | Regenerate `AppBundle/AppIcon.icns` from `scripts/make-icon.swift` |
+| `make screenshots` | Regenerate `docs/screenshots/` (PNG + demo GIF, EN/ES, light/dark) with demo data |
+
+Run `make screenshots` after any visible UI change and commit the new images. The `--screenshots` mode renders the SwiftUI views offscreen with demo data: it never creates audio taps, never changes the real volume and never saves settings.
 
 There are no unit tests. To check a change: `swift build`, then `make install`, open the app and run `--list`. Audio behaviour (taps) can only be confirmed by the user listening, because it needs the System Audio Recording permission.
 
@@ -67,7 +70,8 @@ scripts/install.sh                 installs the latest GitHub release
 scripts/make-icon.swift            draws the app icon
 .github/workflows/release.yml      CI build; publishes a Release on tags v*
 Sources/PerAppVolume/
-  main.swift                       entry point; handles --list
+  main.swift                       entry point; handles --list and --screenshots
+  ScreenshotGenerator.swift        renders README screenshots with demo data
   PerAppVolumeApp.swift            MenuBarExtra scene + AppDelegate
   MixerModel.swift                 app list, saved volumes, creates/removes taps
   Audio/AppTap.swift               process tap + private aggregate device + real-time gain
