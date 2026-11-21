@@ -99,10 +99,13 @@ enum ScreenshotGenerator {
 
     /// Renders a view (with a rounded card background) through AppKit, so native controls are drawn.
     private static func snapshot<V: View>(_ view: V, dark: Bool, scale: CGFloat = 2) -> CGImage? {
+        // Rounded like the macOS 26 system menus and windows.
+        let radius: CGFloat = 16
         let content = view
+            .padding(.vertical, 5)   // NSMenu adds this inset around its content
             .background(Color(nsColor: .windowBackgroundColor))
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
+            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: radius, style: .continuous)
                 .strokeBorder(Color.primary.opacity(0.12), lineWidth: 1))
             .padding(1)
             .environmentObject(MixerModel.shared)

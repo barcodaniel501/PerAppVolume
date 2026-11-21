@@ -72,7 +72,8 @@ scripts/make-icon.swift            dibuja el ícono de la app
 Sources/PerAppVolume/
   main.swift                       punto de entrada; maneja --list y --screenshots
   ScreenshotGenerator.swift        genera las capturas del README con datos de ejemplo
-  PerAppVolumeApp.swift            escena MenuBarExtra + AppDelegate
+  PerAppVolumeApp.swift            punto de entrada de la app + AppDelegate
+  StatusItemController.swift       ícono de la barra de menú; el panel es un NSMenu real con la vista SwiftUI
   MixerModel.swift                 lista de apps, volúmenes guardados, crea/elimina taps
   Audio/AppTap.swift               process tap + dispositivo agregado privado + ganancia en tiempo real
   Audio/AudioProcessScanner.swift  procesos de audio agrupados por el paquete .app más externo
@@ -88,6 +89,7 @@ Sources/PerAppVolume/
 
 - **Bilingüe:** todo texto visible va en `Localization.swift` con su versión en inglés y en español. Nunca escribas textos fijos en las vistas.
 - **Documentación sincronizada:** actualiza `README.md` (inglés, principal) y `README.es.md`, y también `AGENTS.md` y `AGENTS.es.md` cuando cambien las instrucciones.
+- **Panel del menú:** mantenlo como `NSMenu` (no una ventana `MenuBarExtra` ni un panel propio) para que conserve el aspecto del sistema, mantenga visible la barra de menú oculta automáticamente mientras está abierto y se cierre al hacer clic fuera. Los temporizadores que actualizan la interfaz deben correr en `RunLoop.Mode.common`, porque los menús procesan eventos en modo `.eventTracking`.
 - **Código en tiempo real:** `AppTap.render` corre en el hilo de audio. Ahí no se crean asignaciones de memoria, bloqueos, logs ni arreglos de Swift.
 - **Sin drivers ni sudo:** mantén el diseño sin drivers basado en `CATapDescription` con `muteBehavior = .mutedWhenTapped`.
 - **Versión:** sube `CFBundleShortVersionString` en `AppBundle/Info.plist`; los releases se crean al subir un tag `vX.Y.Z`.

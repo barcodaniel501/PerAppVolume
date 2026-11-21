@@ -52,9 +52,13 @@ final class MixerModel: ObservableObject {
         CA.addSystemListener(kAudioHardwarePropertyDefaultOutputDevice) {
             Task { @MainActor in MixerModel.shared.outputDeviceChanged() }
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        // `.common` mode keeps the list (green dots, new apps) updating while the menu is open:
+        // menus run the main loop in event-tracking mode, where default-mode timers pause.
+        let timer = Timer(timeInterval: 1, repeats: true) { _ in
             Task { @MainActor in MixerModel.shared.refresh() }
         }
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
         refresh()
     }
 

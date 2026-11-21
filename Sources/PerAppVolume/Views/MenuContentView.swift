@@ -41,11 +41,16 @@ struct MenuContentView: View {
             Divider()
 
             HStack(spacing: 14) {
-                Button(l10n.t(.openWindow)) { WindowManager.shared.showMixer() }
-                Button(l10n.t(.settings)) { WindowManager.shared.showSettings() }
+                Button(l10n.t(.openWindow)) {
+                    StatusItemController.shared.closeMenu { WindowManager.shared.showMixer() }
+                }
+                Button(l10n.t(.settings)) {
+                    StatusItemController.shared.closeMenu { WindowManager.shared.showSettings() }
+                }
                 Spacer()
-                Button(l10n.t(.quit)) { NSApp.terminate(nil) }
-                    .keyboardShortcut("q")
+                Button(l10n.t(.quit)) {
+                    StatusItemController.shared.closeMenu { NSApp.terminate(nil) }
+                }
             }
             .buttonStyle(.borderless)
             .font(.callout)

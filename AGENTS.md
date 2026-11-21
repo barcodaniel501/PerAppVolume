@@ -72,7 +72,8 @@ scripts/make-icon.swift            draws the app icon
 Sources/PerAppVolume/
   main.swift                       entry point; handles --list and --screenshots
   ScreenshotGenerator.swift        renders README screenshots with demo data
-  PerAppVolumeApp.swift            MenuBarExtra scene + AppDelegate
+  PerAppVolumeApp.swift            App entry + AppDelegate
+  StatusItemController.swift       menu bar icon; the panel is a real NSMenu hosting the SwiftUI view
   MixerModel.swift                 app list, saved volumes, creates/removes taps
   Audio/AppTap.swift               process tap + private aggregate device + real-time gain
   Audio/AudioProcessScanner.swift  audio processes grouped by outermost .app bundle
@@ -88,6 +89,7 @@ Sources/PerAppVolume/
 
 - **Bilingual:** every user-facing string goes in `Localization.swift` with English and Spanish text. Never hard-code UI text in views.
 - **Docs in sync:** update both `README.md` (English, primary) and `README.es.md`, and both `AGENTS.md` and `AGENTS.es.md` when instructions change.
+- **Menu panel:** keep it an `NSMenu` (not a `MenuBarExtra` window or custom panel) so it keeps the system look, keeps an auto-hidden menu bar visible while open, and closes on outside click. Timers that refresh the UI must run in `RunLoop.Mode.common`, because menus track events in `.eventTracking` mode.
 - **Real-time code:** `AppTap.render` runs on the audio thread. No allocations, locks, logging or Swift arrays created there.
 - **No drivers, no sudo:** keep the driver-free design based on `CATapDescription` with `muteBehavior = .mutedWhenTapped`.
 - **Version:** bump `CFBundleShortVersionString` in `AppBundle/Info.plist`; releases are created by pushing a tag `vX.Y.Z`.
